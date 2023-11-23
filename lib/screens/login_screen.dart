@@ -33,7 +33,7 @@ class LoginScreen extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: RichText(
                 text: TextSpan(
-                  text: "No tienes una cuenta? da click en ",
+                  text: "¿No tienes una cuenta?, da click en ",
                   style: const TextStyle(fontSize: 15, color: Colors.black),
                   children: <TextSpan>[
                     TextSpan(
