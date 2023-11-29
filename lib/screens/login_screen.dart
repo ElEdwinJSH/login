@@ -13,13 +13,23 @@ class LoginScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text("Login"),
-            const Padding(
-              padding: EdgeInsets.all(16.0),
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: 'Email',
-                ),
-              ),
+               TextFormField(
+              autocorrect: false,
+              keyboardType: TextInputType.emailAddress,
+              decoration: const InputDecoration(
+                  hintText: 'user@example.com',
+                  labelText: 'Correo electrónico',
+                  ),
+             
+              validator: (value) {
+                String pattern =
+                    r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                RegExp regExp = new RegExp(pattern);
+
+                return regExp.hasMatch(value ?? '')
+                    ? null
+                    : 'El valor ingresado no luce como un correo';
+              },
             ),
             const Padding(
               padding: EdgeInsets.all(16.0),
@@ -28,7 +38,16 @@ class LoginScreen extends StatelessWidget {
                   hintText: 'Contraseña',
                 ),
               ),
-            ),
+            ), ElevatedButton(
+            onPressed: () {
+              Navigator.pop(
+                context,
+                MaterialPageRoute(builder: (context) => const LoginScreen()),
+              );
+            },
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.grey),
+            child: const Text('Entrar'),
+          ),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: RichText(
